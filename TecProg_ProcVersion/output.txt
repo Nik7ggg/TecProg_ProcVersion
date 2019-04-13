@@ -1,10 +1,11 @@
 Filled container. 
-Container contains 6 elements.
+Container contains 7 elements.
 1: It is bus: power = 3, pass. capacity = 2
 2: It is truck: power = 12, tonnage = 11
 3: It is truck: power = 15, tonnage = 14
 4: It is bus: power = 22, pass. capacity = 21
 5: It is bus: power = 26, pass. capacity = 25
 6: It is truck: power = 20, tonnage = 10
+7: It is passenger car: power = 80, full speed = 10
 Empty container. 
 Container contains 0 elements.

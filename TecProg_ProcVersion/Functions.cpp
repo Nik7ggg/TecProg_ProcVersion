@@ -6,10 +6,12 @@ namespace Big_cars {
 	// cигнатуры требуемых внешних функций
 	truck* InDataForTruck(ifstream &ifst);
 	bus* InDataForBus(ifstream &ifst);
+	passenger_car* InDataForPassengerCar(ifstream &ifst);
 	void OutBus(bus *m, ofstream &ofst);
 	void ChooseForOut(transport *s, ofstream &ofst);
 	transport *In(ifstream &ifdt);
 	void OutTruck(truck *r, ofstream &ofst);
+	void OutPassengerCar(passenger_car *r, ofstream &ofst);
 	void Out(container &c, ofstream &ofst);
 	// ввод параметров обобщенной фигуры из файла
 	transport* In(ifstream &ifst)
@@ -20,19 +22,23 @@ namespace Big_cars {
 		switch (k) {
 		case 1:
 			sp = new transport;
-			// в общую вынести
 			sp = (transport*)InDataForTruck(ifst);
 			ifst >> sp->power;
-			//cout << sp->power;
 			sp->k = TRUCK;
 			return sp;
 		case 2:
 			sp = new transport;
-			// в общую вынести
 			sp = (transport*)InDataForBus(ifst);
 			ifst >> sp->power;
 			//cout << sp->power;
 			sp->k = BUS;
+			return sp;
+		case 3:
+			sp = new passenger_car;
+			sp = (transport*)InDataForPassengerCar(ifst);
+			ifst >> sp->power;
+			//cout << sp->power;
+			sp->k = PASSENGER_CAR;
 			return sp;
 		default:
 			return 0;
@@ -40,6 +46,10 @@ namespace Big_cars {
 	}
 	void OutTruck(truck *r, ofstream &ofst) {
 		ofst<<", tonnage = " << r->tonnage << endl;
+	}
+	void OutPassengerCar(passenger_car * r, ofstream & ofst)
+	{
+		ofst << ", full speed = " << r->full_speed << endl;
 	}
 	truck* InDataForTruck(ifstream &ifst)// ввод для Грузовиков
 	{
@@ -119,6 +129,15 @@ namespace Big_cars {
 		return(m);
 	}
 
+	passenger_car * InDataForPassengerCar(ifstream & ifst)
+	{
+		passenger_car *m;
+		m = new passenger_car;
+		//ifst >> m->power;
+		ifst >> m->full_speed;
+		return(m);
+	}
+
 	// Вывод параметров текущей фигуры в поток
 	void ChooseForOut(transport *s, ofstream &ofst) 
 	{
@@ -130,6 +149,10 @@ namespace Big_cars {
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
 			OutBus((bus*)s, ofst);
+			break;
+		case PASSENGER_CAR:
+			ofst << "It is passenger car: power = " << s->power;
+			OutPassengerCar((passenger_car*)s, ofst);
 			break;
 		default:
 			ofst << "Incorrect figure!" << endl;

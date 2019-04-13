@@ -4,7 +4,7 @@ namespace Big_cars {
 
 // значения ключей для каждой из фигур
 
-enum key { TRUCK, BUS };
+enum key { TRUCK, BUS, PASSENGER_CAR };
 struct transport {
 
 	key k; // ключ
@@ -35,6 +35,14 @@ struct truck:transport
 	transport *next;//указатель на следующий узел
 	int power;
 	int  tonnage;
+};
+
+struct passenger_car :transport
+{
+	key k;
+	transport *next;
+	int power;
+	short int full_speed;
 };
 
 } // end Big_cars namespace
