@@ -3,6 +3,10 @@
 #include "iostream"
 using namespace std;
 namespace Big_cars {
+	int ProcessRatationPower(transport *obj);
+	int GetPassengerCapasity(bus *m);
+	int GetTonnage(truck *m);
+	bool Compare(transport *first, transport *second);
 	// cигнатуры требуемых внешних функций
 	truck* InDataForTruck(ifstream &ifst);
 	bus* InDataForBus(ifstream &ifst);
@@ -39,7 +43,33 @@ namespace Big_cars {
 		}
 	}
 	void OutTruck(truck *r, ofstream &ofst) {
-		ofst<<", tonnage = " << r->tonnage << endl;
+		ofst<<", tonnage = " << r->tonnage<<", ";
+	}
+	int ProcessRatationPower(transport * obj)
+	{
+		int temp;
+		switch (obj->k) {
+		case TRUCK:
+			temp = GetTonnage((truck*)obj)/ obj->power;
+			return temp;
+			break;
+		case BUS:
+			temp = (GetPassengerCapasity((bus*)obj)*weight_man) / obj->power;
+			return temp;
+			break;
+		//case PASSENGERCAR
+		default:
+			return 0;
+		}
+		
+	}
+	int GetPassengerCapasity(bus * m)
+	{
+		return m->passengercapacity;
+	}
+	int GetTonnage(truck * m)
+	{
+		return m->tonnage;
 	}
 	truck* InDataForTruck(ifstream &ifst)// ввод для Грузовиков
 	{
@@ -108,7 +138,7 @@ namespace Big_cars {
 	}
 	void OutBus(bus *m, ofstream &ofst)
 	{
-		ofst <<", pass. capacity = " << m->passengercapacity<< endl;
+		ofst <<", pass. capacity = " << m->passengercapacity << ", ";
 	}
 	bus* InDataForBus(ifstream &ifst)// ввод для автобусов
 	{
@@ -126,10 +156,12 @@ namespace Big_cars {
 		case TRUCK:
 			ofst << "It is truck: power = " << s->power;
 			OutTruck((truck*)s, ofst);
+			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
 			break;
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
 			OutBus((bus*)s, ofst);
+			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
 			break;
 		default:
 			ofst << "Incorrect figure!" << endl;
