@@ -10,7 +10,7 @@ struct transport {
 	key k; // ключ
 	transport *next;//указатель на следующий узел
 	int power;//мощность двигателя
-	short int fuel_consumption;//расход топлива на 100 км
+	float fuel_consumption;//расход топлива на 100 км
 };
  // end simple_shapes namespace
 //struct transport;
@@ -27,7 +27,7 @@ struct bus:transport
 	key k; // ключ
 	transport *next;//указатель на следующий узел
 	int power;
-	short int fuel_consumption;//расход топлива на 100 км
+	float fuel_consumption;//расход топлива на 100 км
 	short int passengercapacity;
 };
 
@@ -36,7 +36,7 @@ struct truck:transport
 	key k; // ключ
 	transport *next;//указатель на следующий узел
 	int power;
-	short int fuel_consumption;//расход топлива на 100 км
+	float fuel_consumption;//расход топлива на 100 км
 	int  tonnage;
 };
 
