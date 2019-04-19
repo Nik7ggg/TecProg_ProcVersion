@@ -9,6 +9,7 @@ namespace Big_cars {
 	void Clear(container &c);
 	void In(container &c, ifstream &ifst);
 	void Out(container &c, ofstream &ofst);
+	void OutOnlyBus(container &c, ofstream &ofst);
 }
 using namespace Big_cars;
 

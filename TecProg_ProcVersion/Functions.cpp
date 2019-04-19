@@ -13,6 +13,7 @@ namespace Big_cars {
 	void OutTruck(truck *r, ofstream &ofst);
 	void OutPassengerCar(passenger_car *r, ofstream &ofst);
 	void Out(container &c, ofstream &ofst);
+	void OutOnlyBus(container &c,ofstream &ofst);
 	// ввод параметров обобщенной фигуры из файла
 	transport* In(ifstream &ifst)
 	{
@@ -51,7 +52,7 @@ namespace Big_cars {
 		}
 	}
 	void OutTruck(truck *r, ofstream &ofst) {
-		ofst<<", tonnage = " << r->tonnage << endl;
+		ofst<<", tonnage = " << r->tonnage;
 	}
 	void OutPassengerCar(passenger_car * r, ofstream & ofst)
 	{
@@ -76,8 +77,28 @@ namespace Big_cars {
 			
 			ofst << i << ": ";
 			ChooseForOut(temp, ofst);
+			ofst << endl;
 			i++;
 		} 
+	}
+
+	void OutOnlyBus(container & c, ofstream & ofst)
+	{
+		ofst << "Container contains " << c.len
+			<< " elements." << endl;
+		ofst << "Only Buses." << endl;
+		int i = 1;
+		for (transport *temp = c.Head; i != c.len + 1; temp = temp->next)
+		{
+
+			ofst << i << ": ";
+			if (temp->k == BUS)
+			{
+				ChooseForOut(temp, ofst);
+			}
+			ofst << endl;
+			i++;
+		}
 	}
 
 
@@ -124,7 +145,7 @@ namespace Big_cars {
 	}
 	void OutBus(bus *m, ofstream &ofst)
 	{
-		ofst <<", pass. capacity = " << m->passengercapacity<< endl;
+		ofst <<", pass. capacity = " << m->passengercapacity;
 	}
 	bus* InDataForBus(ifstream &ifst)// ввод для автобусов
 	{
