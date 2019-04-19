@@ -9,7 +9,7 @@ namespace Big_cars {
 	void Clear(container &c);
 	void In(container &c, ifstream &ifst);
 	void Out(container &c, ofstream &ofst);
-	void OutOnlyBus(container &c, ofstream &ofst);
+	void OutOnlyTruck(container &c, ofstream &ofst);
 }
 using namespace Big_cars;
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 	Init(c);
 	In(c, ifst);
 	ofst << "Filled container. " << endl;
-	Out(c, ofst);
+	OutOnlyTruck(c, ofst);
 	Clear(c);
 	ofst << "Empty container. " << endl;
 	Out(c, ofst);

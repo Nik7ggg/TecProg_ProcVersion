@@ -13,7 +13,7 @@ namespace Big_cars {
 	void OutTruck(truck *r, ofstream &ofst);
 	void OutPassengerCar(passenger_car *r, ofstream &ofst);
 	void Out(container &c, ofstream &ofst);
-	void OutOnlyBus(container &c,ofstream &ofst);
+	void OutOnlyTruck(container &c,ofstream &ofst);
 	// ввод параметров обобщенной фигуры из файла
 	transport* In(ifstream &ifst)
 	{
@@ -82,7 +82,7 @@ namespace Big_cars {
 		} 
 	}
 
-	void OutOnlyBus(container & c, ofstream & ofst)
+	void OutOnlyTruck(container & c, ofstream & ofst)
 	{
 		ofst << "Container contains " << c.len
 			<< " elements." << endl;
@@ -92,7 +92,7 @@ namespace Big_cars {
 		{
 
 			ofst << i << ": ";
-			if (temp->k == BUS)
+			if (temp->k == TRUCK)
 			{
 				ChooseForOut(temp, ofst);
 			}
