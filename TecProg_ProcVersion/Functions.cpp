@@ -3,6 +3,9 @@
 #include "iostream"
 using namespace std;
 namespace Big_cars {
+	float ProcessRatationPower(transport *obj);
+	int GetPassengerCapasity(bus *m);
+	int GetTonnage(truck *m);
 	// cигнатуры требуемых внешних функций
 	truck* InDataForTruck(ifstream &ifst);
 	bus* InDataForBus(ifstream &ifst);
@@ -13,7 +16,45 @@ namespace Big_cars {
 	void OutTruck(truck *r, ofstream &ofst);
 	void OutPassengerCar(passenger_car *r, ofstream &ofst);
 	void Out(container &c, ofstream &ofst);
+	void SortList(container&obj);
+	bool compare(transport*first);
+	bool compare(transport* first)
+	{
+		int arg1 = ProcessRatationPower(first);
+		int arg2 = ProcessRatationPower(first->next);
+		return (arg1 > arg2);
+	}
+	void SortList(container& obj)
+	{
+		if (obj.len < 2)
+			return;
+		for (int i = 0; i < obj.len - 1; i++)
+		{
+			for (int k = 0; k < obj.len - 1; k++)
+			{
+				if (compare(obj.Head))
+				{
+					transport* previosly=obj.Head;
+
+					while (previosly->next != obj.Head)
+						previosly = previosly->next;
+
+					transport *next1 = obj.Head->next;
+					transport *next2 = obj.Head->next->next;
+
+					obj.Head->next->next = obj.Head;
+					obj.Head->next = next2;
+					previosly->next = next1;
+					obj.Head = next1;
+				}
+
+				obj.Head = obj.Head->next;
+			}
+			obj.Head = obj.Head->next;
+		}
+	}
 	void OutOnlyTruck(container &c,ofstream &ofst);
+	
 	// ввод параметров обобщенной фигуры из файла
 	transport* In(ifstream &ifst)
 	{
@@ -52,7 +93,33 @@ namespace Big_cars {
 		}
 	}
 	void OutTruck(truck *r, ofstream &ofst) {
-		ofst<<", tonnage = " << r->tonnage;
+		ofst<<", tonnage = " << r->tonnage<<", ";
+	}
+	float ProcessRatationPower(transport * obj)
+	{
+		float temp;
+		switch (obj->k) {
+		case TRUCK:
+			temp = (float)GetTonnage((truck*)obj)/ (float)obj->power;
+			return temp;
+			break;
+		case BUS:
+			temp = (float)(GetPassengerCapasity((bus*)obj)*weight_man) / (float)obj->power;
+			return temp;
+			break;
+		//case PASSENGERCAR
+		default:
+			return 0;
+		}
+		
+	}
+	int GetPassengerCapasity(bus * m)
+	{
+		return m->passengercapacity;
+	}
+	int GetTonnage(truck * m)
+	{
+		return m->tonnage;
 	}
 	void OutPassengerCar(passenger_car * r, ofstream & ofst)
 	{
@@ -145,7 +212,7 @@ namespace Big_cars {
 	}
 	void OutBus(bus *m, ofstream &ofst)
 	{
-		ofst <<", pass. capacity = " << m->passengercapacity;
+		ofst <<", pass. capacity = " << m->passengercapacity << ", ";
 	}
 	bus* InDataForBus(ifstream &ifst)// ввод для автобусов
 	{
@@ -173,11 +240,13 @@ namespace Big_cars {
 			ofst << "It is truck: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutTruck((truck*)s, ofst);
+			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
 			break;
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutBus((bus*)s, ofst);
+			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
 			break;
 		case PASSENGER_CAR:
 			ofst << "It is passenger car: power = " << s->power;

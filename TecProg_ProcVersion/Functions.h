@@ -1,7 +1,7 @@
 #pragma once
 namespace Big_cars {
 
-
+	const int weight_man = 75;
 // значения ключей для каждой из фигур
 
 enum key { TRUCK, BUS, PASSENGER_CAR };

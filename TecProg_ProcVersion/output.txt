@@ -1,12 +1,10 @@
 Filled container. 
-Container contains 7 elements.
-Only Buses.
-1: 
-2: It is truck: power = 12, Fuel_consumption=15.123, tonnage = 11
-3: It is truck: power = 15, Fuel_consumption=10, tonnage = 14
-4: 
-5: 
-6: It is truck: power = 20, Fuel_consumption=5.3, tonnage = 10
-7: 
+Container contains 6 elements.
+1: It is bus: power = 3, pass. capacity = 2, Ratation of power= 50
+2: It is truck: power = 12, tonnage = 110, Ratation of power= 9.16667
+3: It is truck: power = 15, tonnage = 140, Ratation of power= 9.33333
+4: It is bus: power = 22, pass. capacity = 21, Ratation of power= 71.5909
+5: It is bus: power = 26, pass. capacity = 25, Ratation of power= 72.1154
+6: It is truck: power = 20, tonnage = 100, Ratation of power= 5
 Empty container. 
 Container contains 0 elements.
