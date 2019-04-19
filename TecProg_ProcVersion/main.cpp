@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	In(c, ifst);
 	SortList(c);
 	ofst << "Filled container. " << endl;
-	OutOnlyTruck(c, ofst);
+	Out(c, ofst);
 	Clear(c);
 	ofst << "Empty container. " << endl;
 	Out(c, ofst);

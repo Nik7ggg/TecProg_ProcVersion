@@ -18,12 +18,14 @@ namespace Big_cars {
 	void Out(container &c, ofstream &ofst);
 	void SortList(container&obj);
 	bool compare(transport*first);
+
 	bool compare(transport* first)
 	{
 		int arg1 = ProcessRatationPower(first);
 		int arg2 = ProcessRatationPower(first->next);
 		return (arg1 > arg2);
 	}
+	
 	void SortList(container& obj)
 	{
 		if (obj.len < 2)
@@ -107,7 +109,10 @@ namespace Big_cars {
 			temp = (float)(GetPassengerCapasity((bus*)obj)*weight_man) / (float)obj->power;
 			return temp;
 			break;
-		//case PASSENGERCAR
+		case PASSENGER_CAR:
+			temp = (float)(5*weight_man) / (float)obj->power;
+			return temp;
+			break;
 		default:
 			return 0;
 		}
@@ -123,7 +128,7 @@ namespace Big_cars {
 	}
 	void OutPassengerCar(passenger_car * r, ofstream & ofst)
 	{
-		ofst << ", full speed = " << r->full_speed << endl;
+		ofst << ", full speed = " << r->full_speed<<", ";
 	}
 	truck* InDataForTruck(ifstream &ifst)// ввод для Грузовиков
 	{
@@ -240,18 +245,19 @@ namespace Big_cars {
 			ofst << "It is truck: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutTruck((truck*)s, ofst);
-			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
+			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutBus((bus*)s, ofst);
-			ofst << "Ratation of power= " << ProcessRatationPower(s) << endl;
+			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		case PASSENGER_CAR:
 			ofst << "It is passenger car: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutPassengerCar((passenger_car*)s, ofst);
+			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		default:
 			ofst << "Incorrect object!" << endl;
