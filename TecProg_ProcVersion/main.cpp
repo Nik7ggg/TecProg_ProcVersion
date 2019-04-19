@@ -9,6 +9,7 @@ namespace Big_cars {
 	void Clear(container &c);
 	void In(container &c, ifstream &ifst);
 	void Out(container &c, ofstream &ofst);
+	void SortList(container &obj);
 }
 using namespace Big_cars;
 
@@ -26,6 +27,7 @@ int main(int argc, char* argv[]) {
 	container c;
 	Init(c);
 	In(c, ifst);
+	SortList(c);
 	ofst << "Filled container. " << endl;
 	Out(c, ofst);
 	Clear(c);

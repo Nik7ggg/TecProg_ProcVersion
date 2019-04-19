@@ -6,7 +6,6 @@ namespace Big_cars {
 	float ProcessRatationPower(transport *obj);
 	int GetPassengerCapasity(bus *m);
 	int GetTonnage(truck *m);
-	bool Compare(transport *first, transport *second);
 	// cигнатуры требуемых внешних функций
 	truck* InDataForTruck(ifstream &ifst);
 	bus* InDataForBus(ifstream &ifst);
@@ -15,6 +14,43 @@ namespace Big_cars {
 	transport *In(ifstream &ifdt);
 	void OutTruck(truck *r, ofstream &ofst);
 	void Out(container &c, ofstream &ofst);
+	void SortList(container&obj);
+	bool compare(transport*first);
+	bool compare(transport* first)
+	{
+		int arg1 = ProcessRatationPower(first);
+		int arg2 = ProcessRatationPower(first->next);
+		return (arg1 > arg2);
+	}
+	void SortList(container& obj)
+	{
+		if (obj.len < 2)
+			return;
+		for (int i = 0; i < obj.len - 1; i++)
+		{
+			for (int k = 0; k < obj.len - 1; k++)
+			{
+				if (compare(obj.Head))
+				{
+					transport* previosly=obj.Head;
+
+					while (previosly->next != obj.Head)
+						previosly = previosly->next;
+
+					transport *next1 = obj.Head->next;
+					transport *next2 = obj.Head->next->next;
+
+					obj.Head->next->next = obj.Head;
+					obj.Head->next = next2;
+					previosly->next = next1;
+					obj.Head = next1;
+				}
+
+				obj.Head = obj.Head->next;
+			}
+			obj.Head = obj.Head->next;
+		}
+	}
 	// ввод параметров обобщенной фигуры из файла
 	transport* In(ifstream &ifst)
 	{
