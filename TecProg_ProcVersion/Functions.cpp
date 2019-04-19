@@ -3,7 +3,7 @@
 #include "iostream"
 using namespace std;
 namespace Big_cars {
-	int ProcessRatationPower(transport *obj);
+	float ProcessRatationPower(transport *obj);
 	int GetPassengerCapasity(bus *m);
 	int GetTonnage(truck *m);
 	bool Compare(transport *first, transport *second);
@@ -45,9 +45,9 @@ namespace Big_cars {
 	void OutTruck(truck *r, ofstream &ofst) {
 		ofst<<", tonnage = " << r->tonnage<<", ";
 	}
-	int ProcessRatationPower(transport * obj)
+	float ProcessRatationPower(transport * obj)
 	{
-		int temp;
+		float temp;
 		switch (obj->k) {
 		case TRUCK:
 			temp = GetTonnage((truck*)obj)/ obj->power;
