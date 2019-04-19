@@ -42,6 +42,7 @@ namespace Big_cars {
 			sp = new passenger_car;
 			sp = (transport*)InDataForPassengerCar(ifst);
 			ifst >> sp->power;
+			ifst >> sp->fuel_consumption;
 			//cout << sp->power;
 			sp->k = PASSENGER_CAR;
 			return sp;
@@ -159,6 +160,7 @@ namespace Big_cars {
 			break;
 		case PASSENGER_CAR:
 			ofst << "It is passenger car: power = " << s->power;
+			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutPassengerCar((passenger_car*)s, ofst);
 			break;
 		default:

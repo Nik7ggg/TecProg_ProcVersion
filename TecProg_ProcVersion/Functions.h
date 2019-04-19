@@ -45,6 +45,7 @@ struct passenger_car :transport
 	key k;
 	transport *next;
 	int power;
+	float fuel_consumption;
 	short int full_speed;
 };
 
