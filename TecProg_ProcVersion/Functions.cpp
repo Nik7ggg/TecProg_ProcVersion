@@ -21,15 +21,20 @@ namespace Big_cars {
 		ifst >> k;
 		switch (k) {
 		case 1:
-			sp = new transport;
+			//sp = new transport;
+			// в общую вынести
 			sp = (transport*)InDataForTruck(ifst);
 			ifst >> sp->power;
+			ifst >> sp->fuel_consumption;
+			//cout << sp->power;
 			sp->k = TRUCK;
 			return sp;
 		case 2:
-			sp = new transport;
+			//sp = new transport;
+			// в общую вынести
 			sp = (transport*)InDataForBus(ifst);
 			ifst >> sp->power;
+			ifst >> sp->fuel_consumption;
 			//cout << sp->power;
 			sp->k = BUS;
 			return sp;
@@ -144,10 +149,12 @@ namespace Big_cars {
 		switch (s->k) {
 		case TRUCK:
 			ofst << "It is truck: power = " << s->power;
+			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutTruck((truck*)s, ofst);
 			break;
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
+			ofst << ", Fuel_consumption=" << s->fuel_consumption;
 			OutBus((bus*)s, ofst);
 			break;
 		case PASSENGER_CAR:
@@ -155,7 +162,7 @@ namespace Big_cars {
 			OutPassengerCar((passenger_car*)s, ofst);
 			break;
 		default:
-			ofst << "Incorrect figure!" << endl;
+			ofst << "Incorrect object!" << endl;
 		}
 	}
 } // end simple_shapes namespace
