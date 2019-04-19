@@ -50,11 +50,11 @@ namespace Big_cars {
 		float temp;
 		switch (obj->k) {
 		case TRUCK:
-			temp = GetTonnage((truck*)obj)/ obj->power;
+			temp = (float)GetTonnage((truck*)obj)/ (float)obj->power;
 			return temp;
 			break;
 		case BUS:
-			temp = (GetPassengerCapasity((bus*)obj)*weight_man) / obj->power;
+			temp = (float)(GetPassengerCapasity((bus*)obj)*weight_man) / (float)obj->power;
 			return temp;
 			break;
 		//case PASSENGERCAR
