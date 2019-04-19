@@ -1,0 +1,11 @@
+Filled container. 
+Container contains 7 elements.
+1: It is truck: power = 15, tonnage = 430, Ratation of power= 28
+2: It is truck: power = 20, tonnage = 780, Ratation of power= 39
+3: It is truck: power = 12, tonnage = 500, Ratation of power= 41
+4: It is bus: power = 8, pass. capacity = 5, Ratation of power= 46
+5: It is bus: power = 3, pass. capacity = 2, Ratation of power= 50
+6: It is bus: power = 22, pass. capacity = 21, Ratation of power= 71
+7: It is bus: power = 26, pass. capacity = 25, Ratation of power= 72
+Empty container. 
+Container contains 0 elements.
