@@ -1,0 +1,4 @@
+Container contains 3 elements.
+1: It is truck: power = 12, Fuel_consumption=12, tonnage = 390, Ratation of power= 32.5
+2: It is passenger car: power = 3, Fuel_consumption=134, full speed = 2, Ratation of power= 125
+3: It is bus: power = 10, Fuel_consumption=12, pass. capacity = 100, Ratation of power= 750

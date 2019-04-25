@@ -1,0 +1,1 @@
+It is bus: power = 200, Fuel_consumption=10, pass. capacity = 0, Ratation of power= 0

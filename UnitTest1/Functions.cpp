@@ -37,22 +37,18 @@ namespace Big_cars {
 			{
 				if (compare(obj.Head))
 				{
-					if (obj.len > 2) {
-						transport* previosly = obj.Head;
+					transport* previosly=obj.Head;
 
-						while (previosly->next != obj.Head)
-							previosly = previosly->next;
+					while (previosly->next != obj.Head)
+						previosly = previosly->next;
 
-						transport *next1 = obj.Head->next;
-						transport *next2 = obj.Head->next->next;
+					transport *next1 = obj.Head->next;
+					transport *next2 = obj.Head->next->next;
 
-						obj.Head->next->next = obj.Head;
-						obj.Head->next = next2;
-						previosly->next = next1;
-						obj.Head = next1;
-					}
-					if (obj.len = 2)
-						obj.Head = obj.Head->next;
+					obj.Head->next->next = obj.Head;
+					obj.Head->next = next2;
+					previosly->next = next1;
+					obj.Head = next1;
 				}
 
 				obj.Head = obj.Head->next;
@@ -67,8 +63,8 @@ namespace Big_cars {
 	{
 	
 		transport *sp;
-		int k=0;
-		ifst >> k;
+		int k;
+		ifst>>k;
 		switch (k) {
 		case 1:
 			sp = (transport*)InDataForTruck(ifst);
