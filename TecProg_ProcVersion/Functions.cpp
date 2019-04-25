@@ -36,18 +36,23 @@ namespace Big_cars {
 			{
 				if (compare(obj.Head))
 				{
-					transport* previosly=obj.Head;
+					if (obj.len > 2)
+					{
+						transport* previosly = obj.Head;
 
-					while (previosly->next != obj.Head)
-						previosly = previosly->next;
+						while (previosly->next != obj.Head)
+							previosly = previosly->next;
 
-					transport *next1 = obj.Head->next;
-					transport *next2 = obj.Head->next->next;
+						transport *next1 = obj.Head->next;
+						transport *next2 = obj.Head->next->next;
 
-					obj.Head->next->next = obj.Head;
-					obj.Head->next = next2;
-					previosly->next = next1;
-					obj.Head = next1;
+						obj.Head->next->next = obj.Head;
+						obj.Head->next = next2;
+						previosly->next = next1;
+						obj.Head = next1;
+					}
+					else
+						obj.Head = obj.Head->next;
 				}
 
 				obj.Head = obj.Head->next;
