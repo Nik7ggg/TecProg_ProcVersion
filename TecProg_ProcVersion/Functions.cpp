@@ -2,28 +2,31 @@
 #include "Functions.h"
 #include "iostream"
 #include <string>
-using namespace std;
-namespace Big_cars {
-	float ProcessRatationPower(transport *obj);
-	int GetPassengerCapasity(bus *m);
-	int GetTonnage(truck *m);
-	// cигнатуры требуемых внешних функций
-	truck* InDataForTruck(ifstream &ifst);
-	bus* InDataForBus(ifstream &ifst);
-	passenger_car* InDataForPassengerCar(ifstream &ifst);
-	void OutBus(bus *m, ofstream &ofst);
-	void ChooseForOut(transport *s, ofstream &ofst);
-	transport *In(ifstream &ifdt);
-	void OutTruck(truck *r, ofstream &ofst);
-	void OutPassengerCar(passenger_car *r, ofstream &ofst);
-	void Out(container &c, ofstream &ofst);
-	void SortList(container&obj);
-	bool compare(transport*first);
 
-	bool compare(transport* first)
+using namespace std;
+
+namespace Big_cars {
+	float ProcessRatationPower(Transport *obj);
+	int GetPassengerCapasity(Bus *m);
+	int GetTonnage(Truck *m);
+	Truck* InDataForTruck(ifstream &ifst);
+	Bus* InDataForBus(ifstream &ifst);
+	PassengerCar* InDataForPassengerCar(ifstream &ifst);
+	void OutBus(Bus *m, ofstream &ofst);
+	void ChooseForOut(Transport *s, ofstream &ofst);
+	Transport *In(ifstream &ifdt);
+	void OutTruck(Truck *r, ofstream &ofst);
+	void OutPassengerCar(PassengerCar *r, ofstream &ofst);
+	void Out(Container &c, ofstream &ofst);
+	void SortList(Container&obj);
+	bool Сompare(Transport*first);
+	void OutOnlyTruck(Container &c, ofstream &ofst);
+
+	bool Сompare(Transport* first)
 	{
 		float arg1 = ProcessRatationPower(first);
 		float arg2 = ProcessRatationPower(first->next);
+
 		if (arg1 == -1 && arg2 != -1)
 		{
 			return true;
@@ -40,44 +43,49 @@ namespace Big_cars {
 		{
 			return (arg1 > arg2);
 		}
-		
 	}
 	
-	void SortList(container& obj)
+	void SortList(Container& obj)
 	{
-		if (obj.len < 2)
+		if (obj.size_of_list < 2)
 			return;
-		for (int i = 0; i < obj.len - 1; i++)
-		{
-			for (int k = 0; k < obj.len - 1; k++)
-			{
-				if (compare(obj.Head))
-				{
-					transport* previosly=obj.Head;
 
-					while (previosly->next != obj.Head)
+		for (int i = 0; i < obj.size_of_list - 1; i++)
+		{
+			for (int k = 0; k < obj.size_of_list - 1; k++)
+			{
+				if (Сompare(obj.head))
+				{
+					if (obj.size_of_list == 2)
+					{
+						obj.head = obj.head->next;
+						return;
+					}
+
+					Transport* previosly=obj.head;
+
+					while (previosly->next != obj.head)
 						previosly = previosly->next;
 
-					transport *next1 = obj.Head->next;
-					transport *next2 = obj.Head->next->next;
+					Transport *next1 = obj.head->next;
+					Transport *next2 = obj.head->next->next;
 
-					obj.Head->next->next = obj.Head;
-					obj.Head->next = next2;
+					obj.head->next->next = obj.head;
+					obj.head->next = next2;
 					previosly->next = next1;
-					obj.Head = next1;
+					obj.head = next1;
 				}
 
-				obj.Head = obj.Head->next;
+				obj.head = obj.head->next;
 			}
-			obj.Head = obj.Head->next;
+			obj.head = obj.head->next;
 		}
 	}
-	void OutOnlyTruck(container &c,ofstream &ofst);
-	
+
 	// ввод параметров обобщенной фигуры из файла
-	transport* In(ifstream &ifst)
+	Transport* In(ifstream &ifst)
 	{
-		transport *sp;
+		Transport *sp;
 		string temp;
 		int fuel_consumption;
 		int power;
@@ -140,9 +148,7 @@ namespace Big_cars {
 		fuel_consumption = stoull(temp);
 		switch (k) {
 		case 1:
-			//sp = new transport;
-			// в общую вынести
-			sp = (transport*)InDataForTruck(ifst);
+			sp = (Transport*)InDataForTruck(ifst);
 			if (!sp)
 			{
 				return NULL;
@@ -156,7 +162,7 @@ namespace Big_cars {
 			}
 		case 2:
 			
-			sp = (transport*)InDataForBus(ifst);
+			sp = (Transport*)InDataForBus(ifst);
 			if (!sp)
 			{
 				return NULL;
@@ -171,7 +177,7 @@ namespace Big_cars {
 
 		case 3:
 
-			sp = (transport*)InDataForPassengerCar(ifst);
+			sp = (Transport*)InDataForPassengerCar(ifst);
 			if (!sp)
 			{
 				return NULL;
@@ -188,30 +194,36 @@ namespace Big_cars {
 			return NULL;
 		}
 	}
-	void OutTruck(truck *r, ofstream &ofst) {
+
+	void OutTruck(Truck *r, ofstream &ofst) {
 		ofst<<", tonnage = " << r->tonnage<<", ";
 	}
-	float ProcessRatationPower(transport * obj)
+
+	float ProcessRatationPower(Transport * obj)
 	{
 		float temp;
 		switch (obj->k) {
 		case TRUCK:
 			if (obj->power != 0)
 			{
-				temp = (float)GetTonnage((truck*)obj) / (float)obj->power;
+				temp = (float)GetTonnage((Truck*)obj) / (float)obj->power;
 				return temp;
 			}
 			else
+			{
 				return -1;
+			}
 			break;
 		case BUS:
 			if (obj->power != 0)
 			{
-			temp = (float)(GetPassengerCapasity((bus*)obj)*weight_man) / (float)obj->power;
+			temp = (float)(GetPassengerCapasity((Bus*)obj)*weight_man) / (float)obj->power;
 			return temp;
 			}
 			else
+			{
 				return -1;
+			}
 			break;
 		case PASSENGER_CAR:
 			if (obj->power != 0)
@@ -220,29 +232,35 @@ namespace Big_cars {
 				return temp;
 			}
 			else
+			{
 				return -1;
+			}
 			break;
 		default:
 			return 0;
 		}
 		
 	}
-	int GetPassengerCapasity(bus * m)
+
+	int GetPassengerCapasity(Bus * m)
 	{
 		return m->passengercapacity;
 	}
-	int GetTonnage(truck * m)
+
+	int GetTonnage(Truck * m)
 	{
 		return m->tonnage;
 	}
-	void OutPassengerCar(passenger_car * r, ofstream & ofst)
+
+	void OutPassengerCar(PassengerCar * r, ofstream & ofst)
 	{
 		ofst << ", full speed = " << r->full_speed<<", ";
 	}
-	truck* InDataForTruck(ifstream &ifst)// ввод для Грузовиков
+
+	Truck* InDataForTruck(ifstream &ifst)// ввод для Грузовиков
 	{
-		truck *m;
-		m = new truck;
+		Truck *m;
+		m = new Truck;
 		string temp;
 		ifst >> temp;
 		if (temp == "\0")
@@ -258,13 +276,13 @@ namespace Big_cars {
 		m->tonnage = stoull(temp);
 		return(m);
 	}
-	
+
 	// Вывод содержимого контейнера в указанный поток
-	void Out(container &c, ofstream &ofst) {
-		ofst << "Container contains " << c.len
+	void Out(Container &c, ofstream &ofst) {
+		ofst << "Container contains " << c.size_of_list
 			<< " elements." << endl;
 		int i = 1;
-		for (transport *temp = c.Head; i!= c.len + 1;temp = temp->next) 
+		for (Transport *temp = c.head; i!= c.size_of_list + 1;temp = temp->next)
 		{
 			
 			ofst << i << ": ";
@@ -281,13 +299,13 @@ namespace Big_cars {
 		} 
 	}
 
-	void OutOnlyTruck(container & c, ofstream & ofst)
+	void OutOnlyTruck(Container & c, ofstream & ofst)
 	{
-		ofst << "Container contains " << c.len
+		ofst << "Container contains " << c.size_of_list
 			<< " elements." << endl;
 		ofst << "Only Buses." << endl;
 		int i = 1;
-		for (transport *temp = c.Head; i != c.len + 1; temp = temp->next)
+		for (Transport *temp = c.head; i != c.size_of_list + 1; temp = temp->next)
 		{
 
 			ofst << i << ": ";
@@ -299,7 +317,9 @@ namespace Big_cars {
 				}
 			}
 			else
-			ofst << "Error reading data! Expected other values in the string." << endl;
+			{
+				ofst << "Error reading data! Expected other values in the string." << endl;
+			}
 			ofst << endl;
 			i++;
 		}
@@ -307,56 +327,61 @@ namespace Big_cars {
 
 
 	// ввод содержимого контейнера из указанного потока
-	void In(container &c, ifstream &ifst) {
-		transport *temp=NULL;
+	void In(Container &c, ifstream &ifst) {
+		Transport *temp=NULL;
 		while (!ifst.eof()) {
 				
 				temp = In(ifst);
 				if (temp == NULL)
 				{
-					temp = new transport;
+					temp = new Transport;
 				}
-				temp->next = c.Head;
-				if (c.Head != NULL)                       //В том случае если список не пустой
+				temp->next = c.head;
+				if (c.head != NULL)                       //В том случае если список не пустой
 				{
-					c.Tail->next = temp;                    //Запись данных в следующее за последним элементом поле
-					c.Tail = temp;                          //Последний активный элемент=только что созданный.
+					c.tail->next = temp;                    //Запись данных в следующее за последним элементом поле
+					c.tail = temp;                          //Последний активный элемент=только что созданный.
 				}
 				else
 				{
-					c.Head = temp;
-					c.Tail = temp;
+					c.head = temp;
+					c.tail = temp;
 				}
-				c.len++;
+				c.size_of_list++;
 		}
 	}
-	void Init(container &c) 
+
+	void Init(Container &c) 
 	{ 
-		c.Head=c.Tail=NULL;
-		c.len = 0; 
+		c.head = c.tail=NULL;
+		c.size_of_list = 0;
 	}
+
 	// Очистка контейнера от элементов
 	// (освобождение памяти)
-	void Clear(container &c) {
-		while (c.len != 0)                        //Пока размерность списка не станет нулевой
+	void Clear(Container &c) {
+		while (c.size_of_list != 0)                        //Пока размерность списка не станет нулевой
 		{
-			transport *temp = c.Head->next;
-			delete c.Head;                           //Освобождаем память от активного элемента
-			c.Head = temp;                           //Смена адреса начала на адрес следующего элемента
-			c.len--;                                //Один элемент освобожден. корректируем число элементов
+			Transport *temp = c.head->next;
+			delete c.head;                           //Освобождаем память от активного элемента
+			c.head = temp;                           //Смена адреса начала на адрес следующего элемента
+			c.size_of_list--;                                //Один элемент освобожден. корректируем число элементов
 		}
-		c.Head = NULL;
-		c.Tail = NULL;
+
+		c.head = NULL;
+		c.tail = NULL;
 
 	}
-	void OutBus(bus *m, ofstream &ofst)
+
+	void OutBus(Bus *m, ofstream &ofst)
 	{
 		ofst <<", pass. capacity = " << m->passengercapacity << ", ";
 	}
-	bus* InDataForBus(ifstream &ifst)// ввод для автобусов
+
+	Bus* InDataForBus(ifstream &ifst)// ввод для автобусов
 	{
-		bus *m;
-		m = new bus;
+		Bus *m;
+		m = new Bus;
 		string temp;
 		ifst >> temp;
 		if (temp == "\0")
@@ -378,10 +403,10 @@ namespace Big_cars {
 		return(m);
 	}
 
-	passenger_car * InDataForPassengerCar(ifstream & ifst)
+	PassengerCar * InDataForPassengerCar(ifstream & ifst)
 	{
-		passenger_car *m;
-		m = new passenger_car;
+		PassengerCar *m;
+		m = new PassengerCar;
 		string temp;
 		ifst >> temp;
 		if (temp == "\0")
@@ -404,29 +429,29 @@ namespace Big_cars {
 	}
 
 	// Вывод параметров текущей фигуры в поток
-	void ChooseForOut(transport *s, ofstream &ofst) 
+	void ChooseForOut(Transport *s, ofstream &ofst) 
 	{
 		switch (s->k) {
 		case TRUCK:
 			ofst << "It is truck: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
-			OutTruck((truck*)s, ofst);
+			OutTruck((Truck*)s, ofst);
 			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		case BUS:
 			ofst << "It is bus: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
-			OutBus((bus*)s, ofst);
+			OutBus((Bus*)s, ofst);
 			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		case PASSENGER_CAR:
 			ofst << "It is passenger car: power = " << s->power;
 			ofst << ", Fuel_consumption=" << s->fuel_consumption;
-			OutPassengerCar((passenger_car*)s, ofst);
+			OutPassengerCar((PassengerCar*)s, ofst);
 			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		default:
 			ofst << "Incorrect object!";
 		}
 	}
-} // end simple_shapes namespace
+}
