@@ -22,15 +22,32 @@ int main(int argc, char* argv[]) {
 	}*/
 	string in = "input.txt";
 	string out = "output.txt";
+	
 	ifstream ifst(in);
 	ofstream ofst(out);
+	if (!ifst.is_open())
+	{
+		cout << "No input file found or could not open!" << endl;
+		system("pause");
+		return 1;
+	}
+	if (!ofst.is_open())
+	{
+		cout << "No output file found or could not open!" << endl;
+		system("pause");
+		return 1;
+	}
 	cout << "Start" << endl;
 	container c;
 	Init(c);
 	In(c, ifst);
-	SortList(c);
 	ofst << "Filled container. " << endl;
 	Out(c, ofst);
+	ofst << "Sorted container. " << endl;
+	SortList(c);
+	Out(c, ofst);
+	ofst << "Filter container. " << endl;
+	OutOnlyTruck(c,ofst);
 	Clear(c);
 	ofst << "Empty container. " << endl;
 	Out(c, ofst);

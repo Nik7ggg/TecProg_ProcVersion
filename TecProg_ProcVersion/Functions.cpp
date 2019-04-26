@@ -1,6 +1,7 @@
 #include <fstream>
 #include "Functions.h"
 #include "iostream"
+#include <string>
 using namespace std;
 namespace Big_cars {
 	float ProcessRatationPower(transport *obj);
@@ -21,8 +22,8 @@ namespace Big_cars {
 
 	bool compare(transport* first)
 	{
-		int arg1 = ProcessRatationPower(first);
-		int arg2 = ProcessRatationPower(first->next);
+		float arg1 = ProcessRatationPower(first);
+		float arg2 = ProcessRatationPower(first->next);
 		return (arg1 > arg2);
 	}
 	
@@ -61,37 +62,114 @@ namespace Big_cars {
 	transport* In(ifstream &ifst)
 	{
 		transport *sp;
-		int k;
-		ifst >> k;
+		string temp;
+		int fuel_consumption;
+		int power;
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		if (temp.length()  > 1)
+		{
+			ifst.get();
+			getline(ifst, temp, '\n');
+			return NULL;
+		}
+		if (!isdigit(int(unsigned char(temp.front()))))
+		{
+			ifst.get();
+			getline(ifst, temp, '\n');
+			return NULL;
+		}
+		int k = stoull(temp);
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		if (temp.length() > 4)
+		{
+			getline(ifst, temp, '\n');
+			return NULL;
+		}
+		for (auto iter = temp.begin(); iter != temp.end(); ++iter)
+		{
+			if (!isdigit(int(unsigned char(*iter))))
+			{
+				getline(ifst, temp, '\n');
+				return NULL;
+			}
+		}
+		power = stoul(temp);
+
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		for (auto iter = temp.begin(); iter != temp.end(); ++iter)
+		{
+			if (!isdigit(int(unsigned char(*iter))))
+			{
+				getline(ifst, temp, '\n');
+				return NULL;
+			}
+		}
+		if (temp.length() > 3)
+		{
+			getline(ifst, temp, '\n');
+			return NULL;
+		}
+		fuel_consumption = stoull(temp);
 		switch (k) {
 		case 1:
 			//sp = new transport;
 			// в общую вынести
 			sp = (transport*)InDataForTruck(ifst);
-			ifst >> sp->power;
-			ifst >> sp->fuel_consumption;
-			//cout << sp->power;
-			sp->k = TRUCK;
-			return sp;
+			if (!sp)
+			{
+				return NULL;
+			}
+			else
+			{
+				sp->k = TRUCK;
+				sp->power = power;
+				sp->fuel_consumption = fuel_consumption;
+				return sp;
+			}
 		case 2:
-			//sp = new transport;
-			// в общую вынести
+			
 			sp = (transport*)InDataForBus(ifst);
-			ifst >> sp->power;
-			ifst >> sp->fuel_consumption;
-			//cout << sp->power;
-			sp->k = BUS;
-			return sp;
+			if (!sp)
+			{
+				return NULL;
+			}
+			else
+			{
+				sp->k = BUS;
+				sp->power = power;
+				sp->fuel_consumption = fuel_consumption;
+				return sp;
+			}
+
 		case 3:
-			sp = new passenger_car;
+
 			sp = (transport*)InDataForPassengerCar(ifst);
-			ifst >> sp->power;
-			ifst >> sp->fuel_consumption;
-			//cout << sp->power;
-			sp->k = PASSENGER_CAR;
-			return sp;
+			if (!sp)
+			{
+				return NULL;
+			}
+			else
+			{
+				sp->k = PASSENGER_CAR;
+				sp->power = power;
+				sp->fuel_consumption = fuel_consumption;
+				return sp;
+			}
 		default:
-			return 0;
+			getline(ifst, temp, '\n');
+			return NULL;
 		}
 	}
 	void OutTruck(truck *r, ofstream &ofst) {
@@ -102,16 +180,31 @@ namespace Big_cars {
 		float temp;
 		switch (obj->k) {
 		case TRUCK:
-			temp = (float)GetTonnage((truck*)obj)/ (float)obj->power;
-			return temp;
+			if (obj->power != 0)
+			{
+				temp = (float)GetTonnage((truck*)obj) / (float)obj->power;
+				return temp;
+			}
+			else
+				return -1;
 			break;
 		case BUS:
+			if (obj->power != 0)
+			{
 			temp = (float)(GetPassengerCapasity((bus*)obj)*weight_man) / (float)obj->power;
 			return temp;
+			}
+			else
+				return -1;
 			break;
 		case PASSENGER_CAR:
-			temp = (float)(5*weight_man) / (float)obj->power;
-			return temp;
+			if (obj->power != 0)
+			{
+				temp = (float)(5 * weight_man) / (float)obj->power;
+				return temp;
+			}
+			else
+				return -1;
 			break;
 		default:
 			return 0;
@@ -134,8 +227,19 @@ namespace Big_cars {
 	{
 		truck *m;
 		m = new truck;
-		//ifst >> m->power;
-		ifst >> m->tonnage;
+		string temp;
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		if (!isdigit(int(unsigned char(temp.front()))))
+		{
+			getline(ifst, temp, '\n');
+			return false;
+		}
+
+		m->tonnage = stoull(temp);
 		return(m);
 	}
 	
@@ -148,7 +252,12 @@ namespace Big_cars {
 		{
 			
 			ofst << i << ": ";
-			ChooseForOut(temp, ofst);
+			if (temp != NULL)
+			{
+				ChooseForOut(temp, ofst);
+			}
+			else
+				ofst << "Error reading data! Expected other values in the string." << endl;
 			ofst << endl;
 			i++;
 		} 
@@ -164,10 +273,15 @@ namespace Big_cars {
 		{
 
 			ofst << i << ": ";
-			if (temp->k == TRUCK)
+			if (temp != NULL)
 			{
-				ChooseForOut(temp, ofst);
+				if (temp->k == TRUCK)
+				{
+					ChooseForOut(temp, ofst);
+				}
 			}
+			else
+			ofst << "Error reading data! Expected other values in the string." << endl;
 			ofst << endl;
 			i++;
 		}
@@ -223,8 +337,24 @@ namespace Big_cars {
 	{
 		bus *m;
 		m = new bus;
-		//ifst >> m->power;// в общую вынести
-		ifst >> m->passengercapacity;
+		string temp;
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		if (temp.length() > 4)
+		{
+			getline(ifst, temp, '\n');
+			return false;
+		}
+		if (!isdigit(int(unsigned char(temp.front()))))
+		{
+			getline(ifst, temp, '\n');
+			return false;
+		}
+
+		m->passengercapacity = stoull(temp);
 		return(m);
 	}
 
@@ -232,8 +362,24 @@ namespace Big_cars {
 	{
 		passenger_car *m;
 		m = new passenger_car;
-		//ifst >> m->power;
-		ifst >> m->full_speed;
+		string temp;
+		ifst >> temp;
+		if (temp == "\0")
+		{
+			return false;
+		}
+		if (temp.length() >= 4)
+		{
+			getline(ifst, temp, '\n');
+			return false;
+		}
+		if (!isdigit(int(unsigned char(temp.front()))))
+		{
+			getline(ifst, temp, '\n');
+			return false;
+		}
+
+		m->full_speed = stoull(temp);
 		return(m);
 	}
 
