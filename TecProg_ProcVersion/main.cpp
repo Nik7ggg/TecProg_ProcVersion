@@ -43,12 +43,15 @@ int main(int argc, char* argv[]) {
 	In(c, ifst);
 	ofst << "Filled container. " << endl;
 	Out(c, ofst);
+	ofst << endl;
 	ofst << "Sorted container. " << endl;
 	SortList(c);
 	Out(c, ofst);
+	ofst << endl;
 	ofst << "Filter container. " << endl;
 	OutOnlyTruck(c,ofst);
 	Clear(c);
+	ofst << endl;
 	ofst << "Empty container. " << endl;
 	Out(c, ofst);
 	cout << "Stop" << endl;

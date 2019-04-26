@@ -24,7 +24,23 @@ namespace Big_cars {
 	{
 		float arg1 = ProcessRatationPower(first);
 		float arg2 = ProcessRatationPower(first->next);
-		return (arg1 > arg2);
+		if (arg1 == -1 && arg2 != -1)
+		{
+			return true;
+		}
+		if (arg1 != -1 && arg2 == -1)
+		{
+			return false;
+		}
+		if (arg1 == -1 && arg2 == -1)
+		{
+			return false;
+		}
+		if (arg1 != -1 && arg2 != -1)
+		{
+			return (arg1 > arg2);
+		}
+		
 	}
 	
 	void SortList(container& obj)
@@ -255,10 +271,12 @@ namespace Big_cars {
 			if (temp != NULL)
 			{
 				ChooseForOut(temp, ofst);
+				ofst << endl;
 			}
 			else
-				ofst << "Error reading data! Expected other values in the string." << endl;
-			ofst << endl;
+			{
+				ofst << "Error reading data! Expected other values in the string.";
+			}
 			i++;
 		} 
 	}
@@ -292,9 +310,12 @@ namespace Big_cars {
 	void In(container &c, ifstream &ifst) {
 		transport *temp=NULL;
 		while (!ifst.eof()) {
-			if ((temp = In(ifst)) != 0) 
-			{ 
 				
+				temp = In(ifst);
+				if (temp == NULL)
+				{
+					temp = new transport;
+				}
 				temp->next = c.Head;
 				if (c.Head != NULL)                       //В том случае если список не пустой
 				{
@@ -306,8 +327,7 @@ namespace Big_cars {
 					c.Head = temp;
 					c.Tail = temp;
 				}
-				c.len++; 
-			}
+				c.len++;
 		}
 	}
 	void Init(container &c) 
@@ -406,7 +426,7 @@ namespace Big_cars {
 			ofst << "Ratation of power= " << ProcessRatationPower(s);
 			break;
 		default:
-			ofst << "Incorrect object!" << endl;
+			ofst << "Incorrect object!";
 		}
 	}
 } // end simple_shapes namespace
