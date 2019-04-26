@@ -1,117 +1,28 @@
 Filled container. 
-Container contains 35 elements.
-1: Incorrect object!
-2: Incorrect object!
-3: It is truck: power = 900, Fuel_consumption=987, tonnage = 1, Ratation of power= 0.00111111
-4: It is truck: power = 800, Fuel_consumption=987, tonnage = 9, Ratation of power= 0.01125
-5: Incorrect object!
-6: Incorrect object!
-7: Incorrect object!
-8: Incorrect object!
-9: It is bus: power = 598, Fuel_consumption=123, pass. capacity = 1, Ratation of power= 0.125418
-10: It is bus: power = 798, Fuel_consumption=123, pass. capacity = 2, Ratation of power= 0.18797
-11: It is bus: power = 598, Fuel_consumption=123, pass. capacity = 3, Ratation of power= 0.376254
-12: It is bus: power = 398, Fuel_consumption=123, pass. capacity = 4, Ratation of power= 0.753769
-13: It is bus: power = 298, Fuel_consumption=123, pass. capacity = 9, Ratation of power= 2.2651
-14: It is bus: power = 198, Fuel_consumption=123, pass. capacity = 0, Ratation of power= 0
-15: Incorrect object!
-16: Incorrect object!
-17: Incorrect object!
-18: It is passenger car: power = 2002, Fuel_consumption=679, full speed = 0, Ratation of power= 0.187313
-19: Incorrect object!
-20: Incorrect object!
-21: Incorrect object!
-22: Incorrect object!
-23: It is passenger car: power = 2002, Fuel_consumption=679, full speed = 0, Ratation of power= 0.187313
-24: Incorrect object!
-25: Incorrect object!
-26: It is bus: power = 69, Fuel_consumption=678, pass. capacity = 3, Ratation of power= 3.26087
-27: It is bus: power = 800, Fuel_consumption=940, pass. capacity = 1, Ratation of power= 0.09375
-28: It is bus: power = 609, Fuel_consumption=765, pass. capacity = 2, Ratation of power= 0.246305
-29: It is passenger car: power = 501, Fuel_consumption=87, full speed = 1, Ratation of power= 0.748503
-30: It is truck: power = 3, Fuel_consumption=802, tonnage = 679, Ratation of power= 226.333
-31: Incorrect object!
-32: Incorrect object!
-33: It is bus: power = 101, Fuel_consumption=3, pass. capacity = 2, Ratation of power= 1.48515
-34: It is passenger car: power = 602, Fuel_consumption=4, full speed = 0, Ratation of power= 0.622924
-35: Incorrect object!
+Container contains 4 elements.
+1: It is truck: power = 2, Fuel_consumption=3, tonnage = 4, Ratation of power= 2
+2: It is bus: power = 3, Fuel_consumption=4, pass. capacity = 5, Ratation of power= 125
+3: It is passenger car: power = 5, Fuel_consumption=6, full speed = 6, Ratation of power= 75
+4: It is truck: power = 4, Fuel_consumption=5, tonnage = 6, Ratation of power= 1.5
 
-Sorted container. 
-Container contains 35 elements.
-1: Incorrect object!
-2: Incorrect object!
-3: Incorrect object!
-4: Incorrect object!
-5: Incorrect object!
-6: Incorrect object!
-7: It is bus: power = 198, Fuel_consumption=123, pass. capacity = 0, Ratation of power= 0
-8: Incorrect object!
-9: Incorrect object!
-10: Incorrect object!
-11: Incorrect object!
-12: Incorrect object!
-13: Incorrect object!
-14: Incorrect object!
-15: Incorrect object!
-16: Incorrect object!
-17: Incorrect object!
-18: Incorrect object!
-19: Incorrect object!
-20: It is truck: power = 900, Fuel_consumption=987, tonnage = 1, Ratation of power= 0.00111111
-21: It is truck: power = 800, Fuel_consumption=987, tonnage = 9, Ratation of power= 0.01125
-22: It is bus: power = 800, Fuel_consumption=940, pass. capacity = 1, Ratation of power= 0.09375
-23: It is bus: power = 598, Fuel_consumption=123, pass. capacity = 1, Ratation of power= 0.125418
-24: It is passenger car: power = 2002, Fuel_consumption=679, full speed = 0, Ratation of power= 0.187313
-25: It is passenger car: power = 2002, Fuel_consumption=679, full speed = 0, Ratation of power= 0.187313
-26: It is bus: power = 798, Fuel_consumption=123, pass. capacity = 2, Ratation of power= 0.18797
-27: It is bus: power = 609, Fuel_consumption=765, pass. capacity = 2, Ratation of power= 0.246305
-28: It is bus: power = 598, Fuel_consumption=123, pass. capacity = 3, Ratation of power= 0.376254
-29: It is passenger car: power = 602, Fuel_consumption=4, full speed = 0, Ratation of power= 0.622924
-30: It is passenger car: power = 501, Fuel_consumption=87, full speed = 1, Ratation of power= 0.748503
-31: It is bus: power = 398, Fuel_consumption=123, pass. capacity = 4, Ratation of power= 0.753769
-32: It is bus: power = 101, Fuel_consumption=3, pass. capacity = 2, Ratation of power= 1.48515
-33: It is bus: power = 298, Fuel_consumption=123, pass. capacity = 9, Ratation of power= 2.2651
-34: It is bus: power = 69, Fuel_consumption=678, pass. capacity = 3, Ratation of power= 3.26087
-35: It is truck: power = 3, Fuel_consumption=802, tonnage = 679, Ratation of power= 226.333
-
-Filter container. 
-Container contains 35 elements.
-Only Buses.
-1: 
-2: 
-3: 
-4: 
-5: 
-6: 
-7: 
-8: 
-9: 
-10: 
-11: 
-12: 
-13: 
-14: 
-15: 
-16: 
-17: 
-18: 
-19: 
-20: It is truck: power = 900, Fuel_consumption=987, tonnage = 1, Ratation of power= 0.00111111
-21: It is truck: power = 800, Fuel_consumption=987, tonnage = 9, Ratation of power= 0.01125
-22: 
-23: 
-24: 
-25: 
-26: 
-27: 
-28: 
-29: 
-30: 
-31: 
-32: 
-33: 
-34: 
-35: It is truck: power = 3, Fuel_consumption=802, tonnage = 679, Ratation of power= 226.333
-
+MultyMethod:
+TRUCK and BUS.
+It is truck: power = 2, Fuel_consumption=3, tonnage = 4, Ratation of power= 2
+It is bus: power = 3, Fuel_consumption=4, pass. capacity = 5, Ratation of power= 125
+TRUCK and PASSENGER_CAR.
+It is truck: power = 2, Fuel_consumption=3, tonnage = 4, Ratation of power= 2
+It is passenger car: power = 5, Fuel_consumption=6, full speed = 6, Ratation of power= 75
+TRUCK and TRUCK.
+It is truck: power = 2, Fuel_consumption=3, tonnage = 4, Ratation of power= 2
+It is truck: power = 4, Fuel_consumption=5, tonnage = 6, Ratation of power= 1.5
+BUS and PASSENGER_CAR.
+It is bus: power = 3, Fuel_consumption=4, pass. capacity = 5, Ratation of power= 125
+It is passenger car: power = 5, Fuel_consumption=6, full speed = 6, Ratation of power= 75
+BUS and TRUCK.
+It is bus: power = 3, Fuel_consumption=4, pass. capacity = 5, Ratation of power= 125
+It is truck: power = 4, Fuel_consumption=5, tonnage = 6, Ratation of power= 1.5
+PASSENGER_CAR and TRUCK.
+It is passenger car: power = 5, Fuel_consumption=6, full speed = 6, Ratation of power= 75
+It is truck: power = 4, Fuel_consumption=5, tonnage = 6, Ratation of power= 1.5
 Empty container. 
 Container contains 0 elements.

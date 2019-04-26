@@ -454,4 +454,81 @@ namespace Big_cars {
 			ofst << "Incorrect object!";
 		}
 	}
+
+	void MultiMethod(Container s, ofstream &ofst)
+	{
+		Transport *current_first = s.head;
+		Transport *current_second = current_first->next;
+
+		for (size_t i = 0; i < s.size_of_list - 1; i++)
+		{
+			for (size_t j = i + 1; j < s.size_of_list; j++)
+			{
+				switch (current_first->k)
+				{
+				case TRUCK:
+					switch (current_second->k)
+					{
+					case TRUCK:
+						ofst << "TRUCK and TRUCK." << endl;
+						break;
+					case BUS:
+						ofst << "TRUCK and BUS." << endl;
+						break;
+					case PASSENGER_CAR:
+						ofst << "TRUCK and PASSENGER_CAR." << endl;
+						break;
+					default:
+						ofst << "Unknown type." << endl;
+						break;
+					}
+					break;
+				case BUS:
+					switch (current_second->k)
+					{
+					case TRUCK:
+						ofst << "BUS and TRUCK." << endl;
+						break;
+					case BUS:
+						ofst << "BUS and BUS." << endl;
+						break;
+					case PASSENGER_CAR:
+						ofst << "BUS and PASSENGER_CAR." << endl;
+						break;
+					default:
+						ofst << "Unknown type." << endl;
+						break;
+					}
+					break;
+				case PASSENGER_CAR:
+					switch (current_second->k)
+					{
+					case TRUCK:
+						ofst << "PASSENGER_CAR and TRUCK." << endl;
+						break;
+					case BUS:
+						ofst << "PASSENGER_CAR and BUS." << endl;
+						break;
+					case PASSENGER_CAR:
+						ofst << "PASSENGER_CAR and PASSENGER_CAR." << endl;
+						break;
+					default:
+						ofst << "Unknown type." << endl;
+						break;
+					}
+					break;
+				default:
+					ofst << "Unknown type." << endl;
+					break;
+				}
+				ChooseForOut(current_first, ofst);
+				ofst << endl;
+				ChooseForOut(current_second, ofst);
+				ofst << endl;
+				current_second = current_second->next;
+			}
+			current_first = current_first->next;
+			current_second = current_first->next;
+		}
+	}
 }

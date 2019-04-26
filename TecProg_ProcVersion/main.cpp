@@ -14,6 +14,7 @@ namespace Big_cars {
 	void Out(Container &c, ofstream &ofst);
 	void SortList(Container &obj);
 	void OutOnlyTruck(Container &c, ofstream &ofst);
+	void MultiMethod(Container s, ofstream &ofst);
 }
 
 using namespace Big_cars;
@@ -54,14 +55,8 @@ int main(int argc, char* argv[]) {
 	Out(c, ofst);
 	ofst << endl;
 
-	ofst << "Sorted container. " << endl;
-	SortList(c);
-	Out(c, ofst);
-	ofst << endl;
-
-	ofst << "Filter container. " << endl;
-	OutOnlyTruck(c,ofst);
-	ofst << endl;
+	ofst << "MultyMethod:" << endl;
+	MultiMethod(c, ofst);
 
 	Clear(c);
 	ofst << "Empty container. " << endl;
