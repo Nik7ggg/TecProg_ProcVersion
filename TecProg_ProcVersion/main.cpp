@@ -10,6 +10,7 @@ namespace Big_cars {
 	void In(container &c, ifstream &ifst);
 	void Out(container &c, ofstream &ofst);
 	void OutOnlyBus(container &c, ofstream &ofst);
+	void Multi_Method(container &obj, ofstream &fout);
 }
 using namespace Big_cars;
 
@@ -29,6 +30,10 @@ int main(int argc, char* argv[]) {
 	In(c, ifst);
 	ofst << "Filled container. " << endl;
 	Out(c, ofst);
+	ofst << endl;
+
+	ofst << "MultyMethod:" << endl;
+	Multi_Method(c, ofst);
 	Clear(c);
 	ofst << "Empty container. " << endl;
 	Out(c, ofst);

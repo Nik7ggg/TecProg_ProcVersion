@@ -1,10 +1,19 @@
 Filled container. 
-Container contains 6 elements.
+Container contains 3 elements.
 1: It is bus: power = 3, pass. capacity = 2
 2: It is truck: power = 12, tonnage = 11
 3: It is truck: power = 15, tonnage = 14
-4: It is bus: power = 22, pass. capacity = 21
-5: It is bus: power = 26, pass. capacity = 25
-6: It is truck: power = 20, tonnage = 10
+
+MultyMethod:
+Multimethod.
+BUS and TRUCK.
+It is bus: power = 3, pass. capacity = 2
+It is truck: power = 12, tonnage = 11
+BUS and TRUCK.
+It is bus: power = 3, pass. capacity = 2
+It is truck: power = 15, tonnage = 14
+TRUCK and TRUCK.
+It is truck: power = 12, tonnage = 11
+It is truck: power = 15, tonnage = 14
 Empty container. 
 Container contains 0 elements.

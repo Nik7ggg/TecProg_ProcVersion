@@ -156,4 +156,57 @@ namespace Big_cars {
 			ofst << "Incorrect figure!" << endl;
 		}
 	}
+	void Multi_Method(container &obj, ofstream &fout)
+	{
+		transport *current_first = obj.Head;
+		transport *current_second = current_first->next;
+
+		for (size_t i = 0; i < obj.len - 1; i++)
+		{
+			for (size_t j = i + 1; j < obj.len; j++)
+			{
+				switch (current_first->k)
+				{
+				case TRUCK:
+					switch (current_second->k)
+					{
+					case TRUCK:
+						fout << "TRUCK and TRUCK." << endl;
+						break;
+					case BUS:
+						fout << "TRUCK and BUS." << endl;
+						break;
+					default:
+						fout << "Unknown type." << endl;
+						break;
+					}
+					break;
+				case BUS:
+					switch (current_second->k)
+					{
+					case TRUCK:
+						fout << "BUS and TRUCK." << endl;
+						break;
+					case BUS:
+						fout << "BUS and BUS." << endl;
+						break;
+					default:
+						fout << "Unknown type." << endl;
+						break;
+					}
+					break;
+				default:
+					fout << "Unknown type." << endl;
+					break;
+				}
+				ChooseForOut(current_first, fout);
+				fout << endl;
+				ChooseForOut(current_second, fout);
+				fout << endl;
+				current_second = current_second->next;
+			}
+			current_first = current_first->next;
+			current_second = current_first->next;
+		}
+	}
 } // end simple_shapes namespace
