@@ -15,7 +15,7 @@ namespace TestProc
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		TEST_METHOD(RatationPower)
+		TEST_METHOD(RatationPowerTrack)
 		{
 			ifstream fin("E:\\Installed\\TexProg\\TecProg_ProcVersion\\UnitTest1\\InTruck.txt");
 			float expected = 50;
@@ -26,6 +26,30 @@ namespace TestProc
 			actual->fuel_consumption = 15;
 			float actualResult = ProcessRatationPower(actual);
 			Assert::AreEqual(expected,actualResult);
+		}
+		TEST_METHOD(RatationPowerBus)
+		{
+			ifstream fin("E:\\Installed\\TexProg\\TecProg_ProcVersion\\UnitTest1\\InBus.txt");
+			float expected = 75;
+			transport *actual;
+			actual = (transport*)InDataForBus(fin);
+			actual->k = BUS;
+			actual->power = 200;
+			actual->fuel_consumption = 15;
+			float actualResult = ProcessRatationPower(actual);
+			Assert::AreEqual(expected, actualResult);
+		}
+		TEST_METHOD(RatationPowerCar)
+		{
+			ifstream fin("E:\\Installed\\TexProg\\TecProg_ProcVersion\\UnitTest1\\InCar.txt");
+			float expected = 1.875;
+			transport *actual;
+			actual = (transport*)InDataForPassengerCar(fin);
+			actual->k = PASSENGER_CAR;
+			actual->power = 200;
+			actual->fuel_consumption = 15;
+			float actualResult = ProcessRatationPower(actual);
+			Assert::AreEqual(expected, actualResult);
 		}
 		TEST_METHOD(GetPass)
 		{
